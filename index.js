@@ -11,14 +11,11 @@ const connect = mongoose.connect(url, {    //replacing MongoClient.connect
 connect.then(() => {
     console.log('Connected correctly to server');
     
-    //instantiate new document
-    const newCampsite = new Campsite({
+    //instantiate new document by using static method; document is autosaved; a promise is returned
+    Campsite.create({
         name: 'React Lake Campground',
         description: 'test'
-    });
-
-    //mongoose method to save document to the database; returns a promise
-    newCampsite.save() 
+    })
     .then(campsite => {
         console.log(campsite);
         return Campsite.find();  //returns all documents based on Campsite model (static method)
